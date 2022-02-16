@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -23,6 +21,9 @@ public class Main {
         int[][] mat7 = {{2, 0},
                         {0, 0}};
 
+        for(int i = 0; i < 100; i++){
+
+        }
 
 
 

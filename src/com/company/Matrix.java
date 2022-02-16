@@ -2,18 +2,18 @@ package com.company;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.IntPredicate;
-import java.util.stream.IntStream;
+import java.util.function.Function;
 
-public class Matrix {
+public class Matrix{
 
     private final int nCol;
     private final int nRow;
     private final int[][] matrix;
 
 
-    public Matrix(int [][] a){
+    public Matrix(int[][] a){
         this.nCol = a[0].length;
         this.nRow = a.length;
         matrix = a;
@@ -111,9 +111,9 @@ public class Matrix {
     public Matrix transpose(){
         int[][] t = new int[this.nCol][this.nRow];
         Queue<Integer> q = new LinkedList<>();
-        for(int i = 0; i < this.matrix.length; i++){
-            for(int j = 0; j < this.matrix[i].length; j++){
-                q.add(matrix[i][j]);
+        for (int[] ints : this.matrix) {
+            for (int anInt : ints) {
+                q.add(anInt);
             }
         }
         System.out.println(q);
@@ -153,9 +153,10 @@ public class Matrix {
             bool = false;
         }else{
             for(int i = 0; i < this.matrix.length && bool; i++){
-                for(int j = 0; j < this.matrix[i].length && bool; j++){
-                    if(this.matrix[i][j] !=this.matrix[j][i]){
+                for(int j = 0; j < this.matrix[i].length; j++){
+                    if (this.matrix[i][j] != this.matrix[j][i]) {
                         bool = false;
+                        break;
                     }
                 }
             }
