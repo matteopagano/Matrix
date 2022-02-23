@@ -34,15 +34,15 @@ public class Matrix{
         }
     }
 
-    private int sarrus(Matrix m) {
+    private int sarrus() {
         int det = 0;
-        if(m.isTrePerTre()){
-            int aei = m.matrix[0][0] * m.matrix[1][1] * m.matrix[2][2];
-            int bfg = m.matrix[0][1] * m.matrix[1][2] * m.matrix[2][0];
-            int cdh = m.matrix[0][2] * m.matrix[1][0] * m.matrix[2][1];
-            int afh = m.matrix[0][0] * m.matrix[1][2] * m.matrix[2][1];
-            int bdi = m.matrix[0][1] * m.matrix[1][0] * m.matrix[2][2];
-            int ceg = m.matrix[0][2] * m.matrix[1][1] * m.matrix[2][0];
+        if(isTrePerTre()){
+            int aei = matrix[0][0] * matrix[1][1] * matrix[2][2];
+            int bfg = matrix[0][1] * matrix[1][2] * matrix[2][0];
+            int cdh = matrix[0][2] * matrix[1][0] * matrix[2][1];
+            int afh = matrix[0][0] * matrix[1][2] * matrix[2][1];
+            int bdi = matrix[0][1] * matrix[1][0] * matrix[2][2];
+            int ceg = matrix[0][2] * matrix[1][1] * matrix[2][0];
             det = aei + bfg + cdh - afh - bdi - ceg;
         }
         return det;
