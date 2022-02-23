@@ -8,8 +8,8 @@ import java.util.function.Function;
 
 public class Matrix{
 
-    public final int nCol;
-    public final int nRow;
+    private final int nCol;
+    private final int nRow;
     private final int[][] matrix;
 
 
@@ -21,7 +21,6 @@ public class Matrix{
 
     public int determinant(){
         return determinantRec(this);
-
     }
 
     private int determinantRec(Matrix m){
@@ -34,7 +33,6 @@ public class Matrix{
             }
             return sum;
         }
-
     }
 
     private int sarrus(Matrix m) {
@@ -221,7 +219,6 @@ public class Matrix{
                 }
             }
         }
-
         return bool;
     }
 
