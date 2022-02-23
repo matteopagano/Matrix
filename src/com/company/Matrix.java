@@ -12,7 +12,6 @@ public class Matrix{
     private final int nRow;
     private final int[][] matrix;
 
-
     public Matrix(int[][] a){
         this.nCol = a[0].length;
         this.nRow = a.length;
