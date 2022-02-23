@@ -240,4 +240,25 @@ public class Matrix{
         }
         return s.toString();
     }
+
+    @Override
+    public boolean equals(Object o){
+        Matrix b;
+        if(o instanceof Matrix){
+            b = (Matrix) o;
+            boolean cond = b.nRow == this.nRow && b.nCol == this.nCol;
+            if(cond){
+                for(int i = 0; i < this.nRow; i++){
+                    for(int j = 0; j < this.nRow; j++){
+                        if(b.matrix[i][j] != this.matrix[i][j]){
+                            cond = false;
+                        }
+                    }
+                }
+            }
+            return cond;
+        }else{
+            return false;
+        }
+    }
 }

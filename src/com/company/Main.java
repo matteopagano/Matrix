@@ -33,6 +33,13 @@ public class Main {
         int[][] mat7 = {{2, 0},
                         {0, 0}};
 
+        int[][] mat8 = {{2, 0},
+                        {0, 0}};
+
+        Matrix a = new Matrix(mat7);
+        Matrix b = new Matrix(mat8);
+
+        System.out.println("Equal? " + a.equals(b));
 
 
 
