@@ -8,8 +8,8 @@ import java.util.function.Function;
 
 public class Matrix{
 
-    private final int nCol;
-    private final int nRow;
+    public final int nCol;
+    public final int nRow;
     private final int[][] matrix;
 
 
@@ -17,6 +17,46 @@ public class Matrix{
         this.nCol = a[0].length;
         this.nRow = a.length;
         matrix = a;
+    }
+
+    public int determinant(){
+        return determinantRec(this);
+
+    }
+
+    private int determinantRec(Matrix m){
+        if(m.isDuePerDue()){
+            return (m.matrix[0][0] * m.matrix[1][1]) - (m.matrix[0][1] * m.matrix[1][0]);
+        }else{
+            int sum = 0;
+            for(int j = 0; j < m.nRow; j++){
+                sum += Math.pow(-1, 1 + (j+1)) * m.matrix[0][j] * determinantRec(m.subMatrixAlt(0,j,m.nRow,m.nCol));
+            }
+            return sum;
+        }
+
+    }
+
+    private int sarrus(Matrix m) {
+        int det = 0;
+        if(m.isTrePerTre()){
+            int aei = m.matrix[0][0] * m.matrix[1][1] * m.matrix[2][2];
+            int bfg = m.matrix[0][1] * m.matrix[1][2] * m.matrix[2][0];
+            int cdh = m.matrix[0][2] * m.matrix[1][0] * m.matrix[2][1];
+            int afh = m.matrix[0][0] * m.matrix[1][2] * m.matrix[2][1];
+            int bdi = m.matrix[0][1] * m.matrix[1][0] * m.matrix[2][2];
+            int ceg = m.matrix[0][2] * m.matrix[1][1] * m.matrix[2][0];
+            det = aei + bfg + cdh - afh - bdi - ceg;
+        }
+        return det;
+    }
+
+    private boolean isTrePerTre(){
+        return this.nRow == 3 && this.nCol == 3;
+    }
+
+    private boolean isDuePerDue(){
+        return this.nRow == 2 && this.nCol == 2;
     }
 
     public Matrix sum(@NotNull Matrix b){
@@ -108,6 +148,27 @@ public class Matrix{
         return n;
     }
 
+    private Matrix subMatrixAlt(int r, int c,int lR,int lC){
+        int [][] a = new int[lR - 1][lC - 1];
+        int x = 0, y = 0;
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i < lR; i++){
+            for(int j = 0; j < lC; j++){
+                if(!(i == r)){
+                    if(!(j == c)){
+                        q.add(this.matrix[i][j]);
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j < a[0].length; j++){
+                a[i][j] = q.poll();
+            }
+        }
+        return new Matrix(a);
+    }
+
     public Matrix transpose(){
         int[][] t = new int[this.nCol][this.nRow];
         Queue<Integer> q = new LinkedList<>();
@@ -116,7 +177,6 @@ public class Matrix{
                 q.add(anInt);
             }
         }
-        System.out.println(q);
         for(int i = 0; i < this.matrix.length; i++){
             for(int j = 0; j < this.matrix[i].length; j++){
                 t[j][i] = q.poll();
@@ -175,13 +235,13 @@ public class Matrix{
 
     @Override
     public String toString() {
-        String s = "";
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[i].length; j++){
-                s += matrix[i][j] + " ";
+        StringBuilder s = new StringBuilder();
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                s.append(anInt).append(" ");
             }
-            s += "\n";
+            s.append("\n");
         }
-        return s;
+        return s.toString();
     }
 }
